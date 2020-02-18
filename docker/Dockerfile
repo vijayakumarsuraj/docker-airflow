@@ -38,6 +38,7 @@ RUN set -ex \
         libpq-dev \
         git \
     ' \
+    && mkdir -p /usr/share/man/man1 \
     && apt-get update -yqq \
     && apt-get upgrade -yqq \
     && apt-get install -yqq --no-install-recommends \
@@ -45,6 +46,7 @@ RUN set -ex \
         freetds-bin \
         build-essential \
         default-libmysqlclient-dev \
+        default-jre \
         apt-utils \
         curl \
         rsync \
@@ -59,7 +61,8 @@ RUN set -ex \
     && pip install pyOpenSSL \
     && pip install ndg-httpsclient \
     && pip install pyasn1 \
-    && pip install apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
+    && pip install JPype1==0.6.3 \
+    && pip install apache-airflow[crypto,celery,postgres,hive,jdbc,mysql,mssql,hdfs,devel_hadoop,ssh${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
     && pip install 'redis==3.2' \
     && if [ -n "${PYTHON_DEPS}" ]; then pip install ${PYTHON_DEPS}; fi \
     && apt-get purge --auto-remove -yqq $buildDeps \
