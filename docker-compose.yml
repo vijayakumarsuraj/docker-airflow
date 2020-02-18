@@ -16,7 +16,7 @@ services:
 
   webserver:
     build:
-      context: ./docker
+      context: ./docker-build
     restart: always
     depends_on:
       - postgres
@@ -29,9 +29,9 @@ services:
         max-size: 10m
         max-file: "3"
     volumes:
-      - ./volumes/dags:/usr/local/airflow/dags
-      - ./volumes/plugins:/usr/local/airflow/plugins
-      - ./volumes/libs:/usr/local/airflow/libs
+      - ./docker-run/dags:/usr/local/airflow/dags
+      - ./docker-run/plugins:/usr/local/airflow/plugins
+      - ./docker-run/libs:/usr/local/airflow/libs
     ports:
       - "8080:8080"
     command: webserver

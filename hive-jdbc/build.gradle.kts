@@ -13,7 +13,5 @@ dependencies {
 }
 
 tasks.shadowJar {
-    archiveBaseName.set("hive-jdbc")
-
     isZip64 = true
 }
